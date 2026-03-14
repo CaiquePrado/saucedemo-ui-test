@@ -5,6 +5,7 @@
     "axe-core": "^4.11.1",
     "cypress": "^15.11.0",
     "cypress-axe": "^1.7.0",
+    "cypress-mochawesome-reporter": "^4.0.2",
     "eslint": "^10.0.3",
     "globals": "^17.4.0",
     "typescript": "^5.9.3"
