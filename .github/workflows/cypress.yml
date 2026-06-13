@@ -1,9 +1,10 @@
-name: Cypress Tests
+name: e2e-tests
 
 on:
   push:
+  workflow_dispatch:
   schedule:
-    - cron: "0 8 * * 1"
+    - cron: "0 8 * * 1,3,5"
 
 jobs:
   cypress-run:
