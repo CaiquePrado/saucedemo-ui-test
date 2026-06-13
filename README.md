@@ -10,7 +10,7 @@ Para executar este projeto localmente, certifique-se de ter as seguintes ferrame
 1. Clone o repositório:
 
 ```bash
-git clone [https://github.com/CaiquePrado/saucedemo-ui-test.git](https://github.com/CaiquePrado/saucedemo-ui-test.git)
+git clone https://github.com/CaiquePrado/saucedemo-ui-test.git
 ```
 
 2. Acesse a pasta do projeto:
@@ -25,7 +25,7 @@ cd saucedemo-ui-test
 npm install
 ```
 
-## ▶️ Como executar os testes
+## ▶️ Como executar os testes localmente
 
 Você pode executar os testes de duas maneiras: utilizando a interface gráfica do Cypress ou rodando em segundo plano pelo terminal.
 
@@ -39,6 +39,14 @@ npx cypress open
 ```bash
 npx cypress run
 ```
+
+## ▶️ Como executar os testes via CI
+
+1. Acesse a aba Actions no topo deste repositório.
+
+2. No menu lateral esquerdo, clique em e2e-tests.
+
+3. Clique no botão "Run workflow" do lado direito, escolha a branch main e confirme.
 
 ## 🛠️ Tecnologias Utilizadas
 
