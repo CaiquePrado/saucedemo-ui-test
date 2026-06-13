@@ -1,27 +1,51 @@
-import { ProdcutsPage } from "../pages/ProductsPage"
+import { ProductsPage } from "../pages/ProductsPage"
 import { getCredentials } from "../utils/Utils"
 
-describe("Prodcuts tests", () => {
-  const productsPage = ProdcutsPage()
+describe("Products tests", () => {
+  const productsPage = ProductsPage()
 
-  before("login valid user", () => {
+  beforeEach("login valid user", () => {
     getCredentials().then((credentials) => {
       cy.login(credentials)
     })
   })
 
-  it.only("products test", () => {
-    productsPage.getProductsTitle().should("be.visible").contains("Products")
-    cy.scrollTo("bottom")
+  const extractPricesAndValidateOrder = (
+    sortFunction: (a: number, b: number) => number
+  ) => {
+    const extractedPrices: number[] = []
+
+    productsPage
+      .getInventoryItems()
+      .each(($item: JQuery<HTMLElement>) => {
+        productsPage.getItemPrice($item).then(($price: JQuery<HTMLElement>) => {
+          const priceNumber = parseFloat($price.text().replace("$", "").trim())
+          extractedPrices.push(priceNumber)
+        })
+      })
+      .then(() => {
+        const expectedSortedPrices = [...extractedPrices].sort(sortFunction)
+        expect(extractedPrices).to.deep.equal(expectedSortedPrices)
+      })
+  }
+
+  it("Deve ordenar os produtos por preço: do menor para o maior (low to high)", () => {
+    productsPage
+      .getProductsTitle()
+      .should("be.visible")
+      .and("contain", "Products")
+
+    productsPage.getSortDropdown().select("lohi")
+    extractPricesAndValidateOrder((a, b) => a - b)
   })
 
-  it("add products to cart tests", () => {
-    productsPage.getInventoryItems().each((product) => {
-      productsPage.getItemName(product).should("be.visible")
+  it("Deve ordenar os produtos por preço: do maior para o menor (high to low)", () => {
+    productsPage
+      .getProductsTitle()
+      .should("be.visible")
+      .and("contain", "Products")
 
-      productsPage.getItemPrice(product).should("contain", "$")
-
-      cy.wrap(product).find("button").should("contain", "Add to cart").click()
-    })
+    productsPage.getSortDropdown().select("hilo")
+    extractPricesAndValidateOrder((a, b) => b - a)
   })
 })
