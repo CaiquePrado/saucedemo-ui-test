@@ -4,26 +4,30 @@ import { LoginPage } from "../pages/LoginPage"
 import { ProductsPage } from "../pages/ProductsPage"
 import { getCredentials } from "../utils/Utils"
 
-describe("Login", () => {
+describe("Testes da página de login", () => {
   let loginPage: ReturnType<typeof LoginPage>
   const productPage = ProductsPage()
 
-  const invalidUserName = faker.person.fullName()
-  const invalidPassword = faker.internet.password()
+  const usuarioInvalido = faker.person.fullName()
+  const senhaInvalida = faker.internet.password()
 
   beforeEach(() => {
     loginPage = LoginPage()
   })
 
-  it("should login successfully with valid credentials", () => {
+  it("Deve realizar login com sucesso utilizando credenciais válidas", () => {
     getCredentials().then((credentials) => {
       cy.login(credentials)
     })
+
     productPage.getProductsTitle().should("be.visible").contains("Products")
   })
 
-  it("should display an error message when the username is invalid", () => {
-    cy.login({ username: invalidUserName, password: invalidPassword })
+  it("Deve exibir mensagem de erro ao informar usuário inválido", () => {
+    cy.login({
+      username: usuarioInvalido,
+      password: senhaInvalida
+    })
 
     loginPage
       .getErrorMessage()

@@ -1,10 +1,10 @@
 import { ProductsPage } from "../pages/ProductsPage"
 import { getCredentials } from "../utils/Utils"
 
-describe("Products tests", () => {
+describe("Testes da página de produtos", () => {
   const productsPage = ProductsPage()
 
-  beforeEach("login valid user", () => {
+  beforeEach("Realizar login com usuário válido", () => {
     getCredentials().then((credentials) => {
       cy.login(credentials)
     })
@@ -29,7 +29,7 @@ describe("Products tests", () => {
       })
   }
 
-  it("Deve ordenar os produtos por preço: do menor para o maior (low to high)", () => {
+  it("Deve ordenar os produtos por preço: do menor para o maior", () => {
     productsPage
       .getProductsTitle()
       .should("be.visible")
@@ -39,7 +39,7 @@ describe("Products tests", () => {
     extractPricesAndValidateOrder((a, b) => a - b)
   })
 
-  it("Deve ordenar os produtos por preço: do maior para o menor (high to low)", () => {
+  it("Deve ordenar os produtos por preço: do maior para o menor", () => {
     productsPage
       .getProductsTitle()
       .should("be.visible")

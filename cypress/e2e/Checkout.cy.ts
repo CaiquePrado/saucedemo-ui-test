@@ -1,18 +1,19 @@
 import { CheckoutPage } from "../pages/CheckoutPage"
 import { getCredentials } from "../utils/Utils"
 
-describe("Checkout flow", () => {
+describe("Testes da página de Checkout", () => {
   const checkoutPage = CheckoutPage()
 
-  beforeEach("should login and add products to the cart", () => {
+  beforeEach("Deve realizar login e adicionar produtos ao carrinho", () => {
     getCredentials().then((credentials) => {
       cy.login(credentials)
     })
+
     cy.addProductToCart("Sauce Labs Backpack")
     cy.addProductToCart("Sauce Labs Bike Light")
   })
 
-  it("should complete checkout successfully when valid customer information is provided", () => {
+  it("Deve finalizar a compra com sucesso ao informar dados válidos do cliente", () => {
     checkoutPage.clickShoppingCartButton()
     checkoutPage.clickCheckoutButton()
 
