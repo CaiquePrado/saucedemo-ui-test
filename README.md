@@ -54,3 +54,7 @@ npx cypress run
 - **TypeScript:** Utilizado para garantir tipagem estática, auto-complete avançado e maior confiabilidade na manutenção dos testes.
 - **Page Object Model (POM):** Padrão de arquitetura adotado para separar a estrutura da página (seletores HTML) da lógica de testes, facilitando a manutenção e a reutilização.
 - **Custom Commands Cypress:** Criação de comandos customizados para abstrair ações repetitivas, como o login e a adição de produtos ao carrinho.
+
+### Divida técnica
+
+Adicionar session storage para não precisar fazer o login toda hora
